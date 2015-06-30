@@ -26,7 +26,7 @@
                  placeholder="FirstName"
                  ng-model ='fname'>
         </div>
-        {{fname}}
+        
                 <div class="form-group">
           <label class="red"><i class="fa fa-asterisk"></i> LastName</label>
           <input type="text" 
@@ -52,8 +52,8 @@
         </div>
         <div class="form-group" ng-init="days=[01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]";    
             >
-        <label>Date of Birth(dd/mm/yyyy)</label>
-            <input class="datepicker form-control" type="text" placeholder="Try me">
+        <label>Date of Birth</label>
+            <input class="datepicker form-control" type="text" placeholder="Date of Birth">
       <!--      </br>
         <select class="form-control col-md-2 col-sm-2">
             <option value="number"  ng-repeat="day in days track by $index">{{day}}</option>
@@ -100,7 +100,7 @@
 <option value="1323247">rota-unspecified</option>
 <option value="1323244">typh-unspecified</option>
                          </select>
-     {{info.imm}}
+     
             <div ng-if="imm ==='Other'">
                 <p>Please describe the immunization</p>    
             <textarea
@@ -110,9 +110,9 @@
     </div> 
      <div class="form-group" ng-init="days=[01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]";    
             >
-        <label class="red"> <i class="fa fa-asterisk"></i> Date Administered(dd/mm/yyyy)</label>
+        <label class="red"> <i class="fa fa-asterisk"></i> Date Administered</label>
             </br>
-     <input class="datepicker form-control" type="text" placeholder="Try me" ng-model="info.day">
+     <input class="datepicker form-control" type="text" placeholder="pick the corresponding date" ng-model="info.day">
       <!--  <select class="form-control col-sm-2 col-md-2" ng-model="info.day">
             <option  ng-repeat="day in days track by $index">{{day}}</option>
             </select>
@@ -132,7 +132,7 @@
                  class="form-control"
                  placeholder="Enter Provider">
         </div>
-{{info.provider}}
+
         <div class="form-group">
           <label>Lot Number</label>
           <input type="text"
@@ -140,7 +140,7 @@
                  class="form-control"
                  placeholder="Enter LotNumber">
         </div>
-{{info.lotNumber}}
+
     <hr>
 
 

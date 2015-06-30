@@ -25,11 +25,12 @@ app.directive('myDirective', [function () {
     return {
         restrict: 'E',
         templateUrl: 'modal1.html',
-        link: function (scope, element, attrs) {
+        /*link: function (scope, element, attrs) {
           scope.do = function () {
             console.log('doing something...');
           }
-        }
+        }*/
+        controller: 'ModalController'
     };
 }]);
 
@@ -41,3 +42,12 @@ app.controller('homeController', function ($scope, SharedState) {
         console.log('event changed to ' + newValue);
     });
 });
+
+app.controller('ModalController',function($scope)
+{
+               
+               
+               
+               
+               
+            });
