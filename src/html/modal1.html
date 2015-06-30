@@ -1,0 +1,29 @@
+<div ui-content-for="modals">
+<div class="modal" ui-if='event' ui-state='event'>
+    <div class="modal-backdrop in" ui-turn-off="event"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button class="close" ui-turn-off="event">&times;</button>
+        <h4 class="modal-title">Additional information</h4>
+      </div>
+      <div class="modal-body">
+        <p>Please complete any additional information if possible</p>
+                  <div class="form-group">
+          <label>LotNumber</label>
+          <input type="text"
+                 ng-model="info.lotNumber"
+                 class="form-control"
+                 placeholder="Enter LotNumber">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button ui-turn-off="event" >Close</button>
+        <button ui-turn-off="event" class="btn btn-primary" ng-click="do()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<button ui-if="!event" ui-turn-on="event" class="btn btn-primary">Show</button>
+<button ui-if="event" ui-turn-off="event" class="btn btn-danger">Hide</button>

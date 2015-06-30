@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="WeatherApp" ng-controller="MainController">
   <head>
       
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
-<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
-<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">      
+<link rel="stylesheet" href="/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
+<link rel="stylesheet" href="/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
+<link rel="stylesheet" href="/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">  
+<link rel="stylesheet" href="/pickadate.js-3.5.6/lib/themes/default.css">
+<link rel="stylesheet" href="/pickadate.js-3.5.6/lib/themes/default.date.css">  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>      
 <script src="/angular/angular.min.js">
 </script>
 <script src="/angular-route/angular-route.min.js">
 </script>
-<script src="mobile-angular-ui/dist/js/mobile-angular-ui.min.js">
-</script>
+<script src="/mobile-angular-ui/dist/js/mobile-angular-ui.min.js">
+</script> 
+<script src="/pickadate.js-3.5.6/lib/picker.js"></script>
+<script src="/pickadate.js-3.5.6/lib/picker.date.js"></script>   
     <meta charset="utf-8" />
     <title>ICON</title>
 
@@ -19,13 +24,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-    <link rel="stylesheet" href="css/app.min.css" />
-    <link rel="stylesheet" href="css/responsive.min.css" />
+    <link rel="stylesheet" href="/css/app.min.css" />
+    <link rel="stylesheet" href="/css/responsive.min.css" />
     <script src="http://localhost:8001/target/target-script-min.js"></script>
     <script src="cordova.js"></script>
     <script src="js/app.min.js"></script>
+      
   </head>
-  <body ng-app="WeatherApp" ng-controller="MainController">
+    <style>
+    .red
+    {
+    color : #d14;
+    }
+    </style>
+    
+  <body>
 
     <!-- Sidebars -->
     <div ng-include="'sidebar.html'" 
@@ -42,12 +55,13 @@
         </div>
         <div class="btn-group pull-left">
           <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
-            <i class="fa fa-bars"></i> Menu
+            <i class="fa fa-bars"></i> 
           </div>
         </div>
       </div>
 
       <div class="navbar navbar-app navbar-absolute-bottom">
+          <x-my-directive></x-my-directive>
         <div class="btn-group justified">
           <a href="https://github.com/mcasimir/mobile-angular-ui/issues" class="btn btn-navbar"><i class="fa fa-exclamation-circle fa-navbar"></i> Issues</a>
         </div>
@@ -63,9 +77,9 @@
 
             </ng-view>  
           </div>
-
+  <div ui-yield-to="modals"></div>
     </div><!-- ~ .app -->
 
-    <div ui-yield-to="modals"></div>
+  
   </body>
 </html>

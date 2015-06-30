@@ -4,6 +4,7 @@ angular.module('WeatherApp', [
   'WeatherApp.controllers.Main'
 ])
 
-.config(function($routeProvider) {
-  $routeProvider.when('/', {templateUrl:'home.html',  reloadOnSearch: false});
-});
+.config(['$routeProvider',function ($routeProvider) {
+  $routeProvider.when('/', {templateUrl:'home.html',controller: 'homeController',  reloadOnSearch: false});
+  $routeProvider.otherwise({redirectTo: '/home'});
+}]);
