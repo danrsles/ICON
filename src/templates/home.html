@@ -8,80 +8,341 @@
 <div class="scrollable">
  <div class="scrollable-content section">
    
-  <form role="form" ng-submit='submit()'>
+  <form role="form" name="myForm" ng-submit='submit()'>
     <fieldset>
 
 
-      <legend>Form</legend>
+     
         <p>All Fields marked with an asterisk are required </p>
         <br>
- <!--<label>Popup:</label>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="input-group">
-              <input type="text" class="form-control" datepicker-popup='dd-MMMM-yyyy' ng-model="dt" is-open="opened" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="copen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-    </div>-->
  
                   <accordion close-others="false">
-      <accordion-group heading="Patient Demographics">
+      <accordion-group heading="Person Demographics">
     <div class="form-group">
            <label>Health Card Number</label>
           <input type="text" 
                  class="form-control"
-                 placeholder="12345678">
+                 placeholder="12345678"
+                 ng-disabled="dem.done"
+                 ng-model="dem.health"
+                 ng-maxlength="100"
+                 name="hcn">
         </div>
+          <div ng-messages="myForm.hcn.$error" style="color:maroon" role="alert">
+              <p ng-message="maxlength">Your field is too long</p>
+          </div>
 	 <div class="form-group">
           <label class="red"><i class="fa fa-asterisk"></i> FirstName</label>
           <input type="text" 
                  class="form-control"
                  placeholder="FirstName"
-                 ng-model ='fname'>
+                 ng-model="dem.fname"
+                 name= "first"
+                 ng-maxlength="100"
+                 required
+                 ng-disabled="dem.done"
+                 ng-model-options="{ updateOn: 'default blur'}">
         </div>
+           <div ng-messages="myForm.first.$error" style="color:maroon" role="alert">
+              <p ng-message="required">Field is required</p>
+               <p ng-message="maxlength">Your field is too long</p>
+          </div>
+          	 <div class="form-group">
+          <label>MiddleName</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="MiddleName"
+                 ng-model="mname"
+                 name= "middle"
+                 ng-maxlength="100"
+                 ng-disabled="dem.done"
+                 ng-model-options="{ updateOn: 'default blur'}">
+        </div>
+          <div ng-messages="myForm.middle.$error" style="color:maroon" role="alert">
+               <p ng-message="maxlength">Your field is too long</p>
+          </div>
         
                 <div class="form-group">
           <label class="red"><i class="fa fa-asterisk"></i> LastName</label>
           <input type="text" 
                  class="form-control"
-                 placeholder="LastName">
+                 placeholder="LastName"
+                 ng-model="lname"
+                 name="last"
+                 ng-maxlength="100"
+                 required
+                 ng-model-options="{ updateOn: 'default blur'}"
+                 ng-disabled="dem.done">
         </div>
-        <div class="form-group has-success has-feedback">
-          <label>Email</label>
-          <input type="email"
-                 ng-model="email"
-                 class="form-control"
-                 placeholder="Enter email">
-        </div>
+          <div ng-messages="myForm.last.$error" style="color:maroon" role="alert">
+              <p ng-message="required">Field is required</p>
+               <p ng-message="maxlength">Your field is too long</p>
+          </div>
+          <span ng-show="myForm.$valid">Hello</span>
         
         <div class="form-group">
-        <label>Gender</label>    
-        <select class="form-control">
+        <label class="red"><i class="fa fa-asterisk"></i>Gender</label>    
+        <select class="form-control" ng-disabled="dem.done" required ng-model="gender" name="sex">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
             <option value="Female">Undefined</option>
             </select>
         </div>
-        <div class="form-group" ng-init="days=[01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]";    
-            >
+          
+        <div ng-messages="myForm.sex.$error" style="color:maroon" role="alert">
+              <p ng-message="required">Field is required</p>
+          </div>  
+          
+        <div class="form-group" required>
         <label>Date of Birth</label>
-            <input class="datepicker form-control" type="text" placeholder="Date of Birth">
+            <input class=" form-control" type="text" name="dob" placeholder="Date of Birth" ng-disabled="dem.done"datepicker-popup='dd-MMMM-yyyy' dateOptions='dateOptions' ng-model="info.day" is-open="opened" close-text="Close" required>
             </div>
-               <div class="form-group">
-         </br>
-          <label>HomePhone</label>
+          
+           <div ng-messages="myForm.dob.$error" style="color:maroon" role="alert">
+              <p ng-message="required">Field is required</p>
+          </div>  
+          
+           <div class="form-group">
+          <label class="red"><i class="fa fa-asterisk"></i>Address Type</label>
+        <select class="form-control" ng-disabled="dem.done" required ng-model="addressType" name="aT">
+            <option value="Home">Home/Residence</option>
+            <option value="Temporary Address">Temporary Address</option>
+             <option value="No Fixed Address">No Fixed Address</option>
+            <option value="Work/Business">Work/Business</option>
+             <option value="Vacation Home">Vacation Home</option>
+            <option value="Postal Address">Postal Address</option>
+            </select>
+        </div>
+          
+           <div ng-messages="myForm.aT.$error" style="color:maroon" role="alert">
+              <p ng-message="required">Field is required</p>
+          </div>  
+          
+        <div class="form-group">
+          <label>Unit Number</label>
           <input type="text" 
                  class="form-control"
-                 placeholder="xxx-xxx-xxxx">
+                 placeholder="500"
+                 ng-model="unumber"
+                 name="UnitNumber"
+                 ng-disabled="dem.done"
+                 ng-maxlength="100">
         </div>
+          <div ng-messages="myForm.UnitNumber.$error" style="color:maroon" role="alert">
+              <p ng-message="maxlength">Your field is too long</p>
+          </div>  
+          
+        <div class="form-group">
+          <label>Street Number</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="500"
+                 ng-model="stnumber"
+                 name="stNumber"
+                 ng-disabled="dem.done"
+                 ng-maxlength="100">
+        </div>
+          <div ng-messages="myForm.stNumber.$error" style="color:maroon" role="alert">
+              <p ng-message="maxlength">Your field is too long</p>
+          </div>  
+        <div class="form-group">
+          <label>Province</label>
+    <select class="form-control" ng-disabled="dem.done" name="province" ng-model="prov"required>
+            <option value="Ontario">Ontario</option>
+            <option value="British Columbia">British Columbia</option>
+            <option value="Other">Other</option>
+            <option value="Female">Undefined</option>
+            </select>
+        </div>
+          {{prov}}
+          <div ng-messages="myForm.province.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>
+          </div>  
+        <div class="form-group">
+          <label>PO Box</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder=""
+                 ng-model="poBox"
+                 name="POB"
+                 ng-disabled="dem.done"
+                 ng-maxlength="100">
+        </div>
+           <div ng-messages="myForm.POB.$error" style="color:maroon" role="alert">
+               <p ng-message="maxlength">Your field is too long</p>
+          </div>  
+          <div class="form-group">
+            <label class="red"><i class="fa fa-asterisk"></i>City</label>
+          <input class="form-control" ng-model="city" name="City"
+                 ng-disabled="dem.done"
+                 required typeahead="city for city in cities">
+        </div>
+               <div ng-messages="myForm.City.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>
+          </div> 
+              
+        <div class="form-group">
+        <label class="red"><i class="fa fa-asterisk"></i>Postal Code</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="A#A#A#"
+                 ng-model="poCode"
+                 name="postalCode"
+                 ng-disabled="dem.done"
+                 ng-pattern="/^[A-Z]\d[A-Z]\d[A-Z]\d$/"
+                 required>
+        </div>
+               <div ng-messages="myForm.postalCode.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>
+        <p ng-message="pattern">Incorrect Format</p>       
+          </div>  
+<!--          <span class="red error"  ng-show="myForm.postalCode.$error.pattern"><em>Incorrect format</em></span>-->
+                   
+        <div class="form-group">
+                  <label class="red"><i class="fa fa-asterisk"></i>Submitter First Name</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="First"
+                 ng-model="SubmitterFN"
+                 name="SubmitterFirstName"
+                 ng-disabled="dem.done"
+                 required
+                 ng-maxlength="100">
+        </div>
+              <div ng-messages="myForm.SubmitterFirstName.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>
+        <p ng-message="maxlength">Your field is too long</p>          
+          </div> 
+        
+        <div class="form-group">
+                  <label class="red"><i class="fa fa-asterisk"></i>Submitter Last Name</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="Last"
+                 ng-model="SubmitterLN"
+                 name="SubmitterLastName"
+                 ng-disabled="dem.done"
+                 required
+                 ng-maxlength="100">
+        </div>
+              <div ng-messages="myForm.SubmitterLN.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>
+        <p ng-message="maxlength">Your field is too long</p>          
+          </div> 
+          
+        <div class="form-group">
+        <label class="red"><i class="fa fa-asterisk"></i>Submitter Relationship</label>    
+        <select class="form-control" ng-disabled="dem.done" required name="subRelationship" ng-model="sr">
+            <option value="Parent">Parent</option>
+            <option value="Grandparent">Grandparent</option>
+            <option value="Legal Guardian">Legal Guardian</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Doctor">Doctor</option>
+            <option value="Self">Self</option>
+            <option value="Other">Other</option>
+            </select>
+        </div>
+          <div>
+              <textarea ng-if="sr =='Other'"class="form-control" rows="3" required  ng-maxlength="100"></textarea>
+          </div>
+          {{sr}}
+          <p> Please describe your relationship to the person you are submitting for:</p>
+               <div ng-messages="myForm.subRelationship.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>
+        <p ng-message="maxlength">Your field is too long</p>          
+          </div>
+          
+        <div class="form-group">
+        <label class="red"><i class="fa fa-asterisk"></i>Submitter Phone Number Type</label>    
+        <select class="form-control" ng-disabled="dem.done" required name="Spnt" ng-model="SubmitterPhoneNumberType">
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Other">Other</option>
+            </select>
+        </div>
+              
+               <div ng-messages="myForm.Spnt.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>       
+          </div>
+                      
+          <div class="form-group">
+         </br>
+          <label class="red"><i class="fa fa-asterisk"></i>Submitter Phone Number</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="xxx-xxx-xxxx"
+                 ng-disabled="dem.done"
+                 required
+                 name="Spn"
+                 ng-model="SubmitterPhoneNumber">
+        </div>
+          
+          <div ng-messages="myForm.Spn.$error" style="color:maroon" role="alert">
+        <p ng-message="required">Field is required</p>       
+          </div>
+        
+                <div class="form-group">
+        <label>Submitter Phone Number Type</label>    
+        <select class="form-control" ng-disabled="dem.done" name="Spnt2" ng-model="SubmitterPhoneNumberType2">
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Other">Other</option>
+            </select>
+        </div>
+          
+          <div class="form-group">
+         </br>
+          <label>Submitter Phone Number</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="xxx-xxx-xxxx"
+                 ng-disabled="dem.done"
+                 name="">
+        </div>
+        
+        <div class="form-group">
+          <label>Submitter Email Address</label>
+          <input type="email" 
+                 class="form-control"
+                 placeholder="Enter email"
+                 ng-disabled="dem.done"
+                 ng-maxlength="100"
+                 name="sea"
+                 ng-model="sEA">
+        </div>
+                       <div ng-messages="myForm.sea.$error" style="color:maroon" role="alert">
+        <p ng-message="maxlength">Your field is too long</p>       
+          </div>
+                      
+        <div class="form-group">
+          <label>School/ Day Care</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="St.Ignatious of Loyola"
+                 ng-disabled="dem.done">
+        </div>
+        
+        <div class="form-group">
+          <label>School/Day Care City</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="Toronto"
+                 ng-disabled="dem.done">
+        </div>
+        <h4>CAPTCHA</h4>
+        <input class="form-control" type="text" id="defaultReal" name="defaultReal"></p>
+      <button class="btn btn-primary" id="attempt" onclick="check()">Attempt</button>
+      <em> <p id="help"></p></em>
+                      <button class="btn btn-primary pull-left" ng-click="edit()" ng-disabled="!dem.done">Edit</button>
+                      <button class="btn btn-primary pull-right" ng-click="update()" ng-disabled="dem.done">Done</button>                      
+                      
     </accordion-group>
           
- <accordion-group heading="Immunization">
-     <button class="btn btn-default form-control" ng-click="open()">Report Vaccination</button>
+ <accordion-group heading="Immunization(s)">
+     <button class="btn btn-default form-control" ng-click="open()" ng-disabled="imm.done">Report Vaccination(s)</button>
      <!--Accordion body-->
      <br>
      <br>
@@ -91,7 +352,7 @@
         <th>Agent
         <th>Date Administered
         <th>Provider
-        <th>LotNumber
+        <th>Lot #
     </tr>
     <tr ng-repeat="s in sums">
         <td>{{s.Agent}}</td>
@@ -100,24 +361,29 @@
         <td>{{s.LotNumber}}</td>
     </tr>
 
-</table>   
+</table>
+<br>
+     <button ng-if="info.show" class="btn btn-primary pull-right" ng-click="mupdate()" ng-disabled="imm.done">Done</button>
+     <button ng-if="info.show" class="btn btn-primary pull-left" ng-click="medit()" ng-disabled="!imm.done">Edit</button>
     </accordion-group>
-  </accordion>
-     
+        <!-- CSV, send to server -->
+    <accordion-group heading="Verify and Submit">
+        <button class="btn btn-default form-control" ng-csv="getArray" csv-header="['Name', 'Date of Birth']" filename="test.csv">Export to CSV</button>
+  </accordion> 
     <div>
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">Before we begin!</h3>
+            <h3 class="modal-title">Vaccine information</h3>
         </div>
-        <div class="modal-body">
-            <!--<h4>Have you heard of an immunization Lot Number Before???<input type="checkbox" ng-model="AnswerPatient"></br>Y</h4>
-            
-            <h4>How about an immunization Provider???</br><input type="checkbox" ng-model="AnswerImmunization"></h4>-->
-            
+        <div class="modal-body" ng-show="myForm.$invalid"><h4>Please fill out "Person Demographics" if you wish to proceed</h4></div>
+        <div class="modal-body" ng-show="myForm.$valid">
             <!-- modal body-->
+            <div class="container-fluid">
+<div class="row">
+    <div class = "col-xs-6">
            <div class="form-group" >
+               <br>
         <label class="red"><i class="fa fa-asterisk"></i>Immunizations</label> 
-        <p>Select an immunization.
           <select class="form-control" ng-model="info.imm" >
 <option value="1327833">ap-unspecified</option>
 <option value="1323270">d-unspecified</option>
@@ -140,57 +406,55 @@
 <option value="1323247">rota-unspecified</option>
 <option value="1323244">typh-unspecified</option>
                          </select>
+
+            </div>
     </div> 
-     <div class="form-group" ng-init="days=[01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]";    
-            >
-        <label class="red"> <i class="fa fa-asterisk"></i> Date Administered</label>
-              <div class="row">
-        <div class="col-md-6">
-            <p class="input-group">
+    <div class = "col-xs-6">
+     <div class="form-group">
+        <label class="red"> <i class="fa fa-asterisk"></i> Date<br>Administered</label>
               <input type="text" class="form-control" datepicker-popup='dd-MMMM-yyyy' dateOptions='dateOptions' ng-model="info.day" is-open="opened" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="show()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-         </div>
-        <div class="form-group">
-           
+                  
+    </div>
+            </div>
+                </div>
+    <div class="row">
+        <div class="col-xs-6">
+        <div class="form-group ">
           <label>Provider</label>
           <input type="text"
                  ng-model="info.provider"
                  class="form-control"
                  placeholder="Enter Provider">
         </div>
+        </div>
 
         <div class="form-group">
+            <div class="col-xs-6">
           <label>Lot Number</label>
           <input type="text"
                  ng-model="info.lotNumber"
                  class="form-control"
                  placeholder="Enter LotNumber">
-        </div> 
-        <div class="form-group">
-           <p>Please click below if you wish to add more entries</p>
-
+        </div>
+        </div>
+         </div>
+            </div>
+<button class="form-control btn btn-primary" ng-click="addAgent()">Add agent</button>
         </div>
 
-        </div>
-        <div class="modal-footer">
+            
         
-            <button class="form-control btn btn-primary" ng-click="addAgent()">Add agent</button>
-        </div>
     </script>
     </div>
     <hr>
 
     <div ui-content-for="navbarAction">
-      <a class='btn' ng-click='submit()'>Submit</a>
+      <a class='btn' ng-click='submit()'>Verify and Submit</a>
     </div>
 
 <script>
     $(document).ready(function(){
-
+//$(".combobox").combobox();
         $("input").click(function(){
 
             $(".datepicker").pickadate({
@@ -204,7 +468,7 @@
     </fieldset>
 <div ng-init="isDisabled = true ">
     <button class="btn btn-primary btn-block" disabled="{{isDisabled}}" >
-      Submit
+      Verify and Submit
     </button>
 </div>
 
@@ -215,7 +479,7 @@
   </form>
  </div>
 </div>
-
+</div>
       <!--  <select class="form-control col-sm-2 col-md-2" ng-model="info.day">
             <option  ng-repeat="day in days track by $index">{{day}}</option>
             </select>

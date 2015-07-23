@@ -1,13 +1,70 @@
-var app= angular.module('WeatherApp.controllers.Main', [  'ngRoute',
-  'mobile-angular-ui','ui.bootstrap']);
+var app= angular.module('WeatherApp.controllers.Main', [  'ngRoute', 'mobile-angular-ui','ui.bootstrap','ngMessages','ngSanitize', 'ngCsv']);
 
-app.controller('MainController',['$scope',function($scope){
-                                                        
-}]);
+app.factory('connect', function(){
+var bar="";
+return{
+give : function (x,y){
+bar=x;    
+},    
+get : function(){
+return bar;}};
 
-app.controller('homeController', function ($scope, $modal, $log) {
+});
 
- 
+
+app.controller('MainController',function($scope,connect){
+ $scope.bar={max:100, value: 0};
+$scope.$watch(connect.get,function(v){
+$scope.bar.value=v;
+              });
+    
+});
+
+app.controller('homeController', function ($scope, $modal, $log,connect) {
+$scope.cities= ['Toronto'];    
+$scope.dem={done:false, pass:false, health:'', fname:''};
+    
+$scope.imm={done:false};
+$scope.poCode=""; 
+$scope.$watchCollection("[dem.health,dem.fname]", function(newValue, oldValue) {
+	  $scope.getArray = [{a:$scope.dem.fname , b:$scope.dem.health}, {a:3, b:4}];
+  });    
+$scope.check= function(){    
+if($scope.poCode.match(/([A-Z]\d[A-Z]\d[A-Z]\d)/)==null)
+   {
+    $scope.dem.pass="true";
+   $scope.poCode="";
+   }
+else{
+$scope.dem.pass="false";
+}    
+   };
+$scope.update= function(){    
+if($scope.myForm.$valid){
+connect.give(25);
+$scope.dem.done="true";    
+}
+else
+{
+
+}    
+};
+    
+$scope.edit=function(){
+connect.give(0);
+$scope.dem.done= !$scope.dem.done;    
+};
+
+$scope.mupdate=function(){
+connect.give(50);
+$scope.imm.done="true";    
+}
+
+$scope.medit=function(){
+connect.give(25);
+$scope.imm.done= !$scope.imm.done;    
+}
+
   //modal   
 $scope.sucess="false";
 $scope.Agent;
@@ -28,6 +85,7 @@ $scope.opened="false"
       controller: 'ModalInstanceCtrl',
       size: size,
       scope:$scope,
+      windowClass: 'xx-dialog',    
       resolve: {
         items: function () {
           return $scope.items;

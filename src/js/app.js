@@ -2,6 +2,7 @@ angular.module('WeatherApp', [
   'ngRoute',
   'mobile-angular-ui',
     'ui.bootstrap',
+    'ngMessages',
   'WeatherApp.controllers.Main'
 ])
 
