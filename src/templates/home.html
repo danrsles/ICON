@@ -244,10 +244,11 @@
             </select>
         </div>
           <div>
+              <p ng-if="sr =='Other'"> Please describe your relationship with the person you are submitting for:</p>
               <textarea ng-if="sr =='Other'"class="form-control" rows="3" required  ng-maxlength="100"></textarea>
           </div>
           {{sr}}
-          <p> Please describe your relationship to the person you are submitting for:</p>
+          
                <div ng-messages="myForm.subRelationship.$error" style="color:maroon" role="alert">
         <p ng-message="required">Field is required</p>
         <p ng-message="maxlength">Your field is too long</p>          
@@ -368,7 +369,7 @@
     </accordion-group>
         <!-- CSV, send to server -->
     <accordion-group heading="Verify and Submit">
-        <button class="btn btn-default form-control" ng-csv="getArray" csv-header="['Name', 'Date of Birth']" filename="test.csv">Export to CSV</button>
+        <button class="btn btn-default form-control" ng-csv="getArray" csv-header="['Name', 'Health Card Number']" filename="test.csv">Export to CSV</button>
   </accordion> 
     <div>
     <script type="text/ng-template" id="myModalContent.html">
