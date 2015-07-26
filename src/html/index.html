@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <!--<link rel="stylesheet" href="/pickadate.js-3.5.6/lib/themes/classic.css">-->     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>      
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->      
 <script src="/angular/angular.min.js">
 </script>
 <script src="/angular-route/angular-route.min.js">
@@ -17,13 +17,14 @@
 </script> 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>      
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script> 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-sanitize.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-sanitize.min.js"></script>
     <script src="ng-csv-master/build/ng-csv.js"></script>
+      <script src='http://www.google.com/recaptcha/api.js'></script>
   </head>
     <!--Jquery real person -->
-<script src="jquery.realperson.package-2.0.1/jquery.plugin.js"></script>
+<!--<script src="jquery.realperson.package-2.0.1/jquery.plugin.js"></script>
 <script type="text/javascript" src="jquery.realperson.package-2.0.1/jquery.realperson.js"></script>
-  
+  -->
     <meta charset="utf-8" />
     <title>ICON</title>
 
@@ -57,7 +58,7 @@ document.write('<link rel="stylesheet" href="/pickadate.js-3.5.6/lib/themes/defa
 document.write('<link rel="stylesheet" href="/pickadate.js-3.5.6/lib/themes/classic.date.css">')     ;     
       }
       </script>-->
-      <script type="text/javascript">
+      <!--<script type="text/javascript">
       //?defaultReal=1&defaultRealHash=177622
   function check(){
   var number= $('#defaultReal').realperson('getHash');
@@ -83,7 +84,7 @@ document.getElementById("help").innerHTML="This is incorrect";
 $(function(){
 $('#defaultReal').realperson({length: 3});
 });
-    </script>
+    </script>-->
   </head>
     <style>
     .red
@@ -98,6 +99,35 @@ $('#defaultReal').realperson({length: 3});
     {
     font-family: 'Helvetica'
     }
+        body { font: 12px Arial; padding: 2px; } table { border: 1px solid black;
+    table-layout: fixed; border-collapse: collapse; margin-right:auto; width:
+    auto; font: 10px Arial; } .active{ background-color: rgba(255, 0, 0, 0.2);
+    background: #f5f5f5; } .nopadding { padding-left: 0px; padding-right: 0px;
+    } #pageContent{ border: 1px solid black; } .padRight { padding-left: 0px; }
+    .padLeft { padding-right: 0px; } .table1 { margin-right:auto;
+    background-color: #fffb89; } .table1 tbody tr:nth-child(odd) {
+    background-color: rgba(211,211,211, 0.6); } .schedule { border: 1px solid
+    black; table-layout: fixed; border-collapse: collapse; //margin-left:auto;
+    margin-right:auto; width: 100%; //font: 10px Arial; } .schedule thead
+    tr:nth-child(odd) { background-color: rgba(211, 211, 211, 0.6); } .schedule
+    tbody tr:nth-child(even) { background-color: rgba(211, 211, 211, 0.6); }
+    .schedule th{ border: 1px solid black; height: 10px; padding: 1px;
+    text-align: left; } th, td { border: 1px solid black; border: 1px solid
+    black; padding: 0px; margin: 0px; //text-align: center; word-break: normal;
+    } th{ text-align: center; } td{ min-height: 5px; text-align: left;
+    padding-left: 5px; min-width: 20px; } .td1{ padding: 0px; } .h1{ font: 14px
+    Arial; font-weight: bold; } .h2{ font: 12px Arial; } li{ font: 10px Arial;}
+    ul{ margin: 1px; padding: 1px; } ul.checkmark { list-style-type: none; }
+    ul.checkmark li:before { content:"\2713\0020"; } .spacer { padding: 10px; }
+    hr { size: 5px; } .hr1 { margin: 2px; } .label1 { margin-bottom: 1px;
+    margin-top: 1px; } notes { height : 33%; //vertical-align: bottom; } .row{
+    [class*=col-8]{ height: 8.25in;} } // timeline css .vis-item.invisible {
+    display: none; } .vis-item.vis-background.negative { background-color:
+    rgba(255, 0, 0, 0.2); } /* alternating column backgrounds */ .vis-time-axis
+    .vis-grid.vis-odd { background: #f5f5f5; } .vis-item.red { color: black;
+    background-color: red; border-color: red; } #visualization { position:
+    relative; } @media only screen { .hideScreen { display: none; } } /*.page{
+    height: 5.5in; }*/
     </style>
     
   <body>
