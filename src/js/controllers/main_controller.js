@@ -72,6 +72,8 @@ formatYear: 'yy',
 startingDay:1    
 };
 
+$scope.maxDate = new Date();    
+    
 $scope.format='yyyy-MMMM-dd';    
 // yellow card input
    var i= 0;

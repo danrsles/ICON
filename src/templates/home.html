@@ -454,7 +454,7 @@
 							<th id="vaccineList" style="background-color:rgba(211,211,211, 0.6)" colspan="{{vaccList.length}}">Vaccine protects against the following diseases:</th>
 							</tr>
 							<tr>
-							<th style="width:20px" id="vaccineList" ng-repeat="vacc in vaccList"><svg height="90" width="20">
+							<th style="width:30px" id="vaccineList" ng-repeat="vacc in vaccList"><svg height="90" width="20">
 								<text transform="translate(15,90)rotate(-90)" fill="black" y="0" x="0">{{vacc}}</text></svg>
 							</th>
 					
@@ -573,7 +573,7 @@
     <div class = "col-xs-6">
      <div class="form-group">
         <label class="red"> <i class="fa fa-asterisk"></i> Date<br>Administered</label>
-              <input type="text" class="form-control" datepicker-popup='{{format}}' dateOptions='dateOptions' ng-model="info.day" is-open="opened" close-text="Close" />
+              <input type="text" class="form-control" datepicker-popup='{{format}}' dateOptions='dateOptions' max-date="maxDate" ng-model="info.day" is-open="opened" close-text="Close" />
                   
     </div>
             </div>
