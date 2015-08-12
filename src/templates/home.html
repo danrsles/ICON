@@ -32,7 +32,7 @@
               <p ng-message="maxlength">Your field is too long</p>
           </div>
 	 <div class="form-group">
-          <label class="red"><i class="fa fa-asterisk"></i> FirstName</label>
+          <label class="red"><i class="fa fa-asterisk"></i>Legal First Name</label>
           <input type="text" 
                  class="form-control"
                  placeholder="FirstName"
@@ -48,7 +48,7 @@
                <p ng-message="maxlength">Your field is too long</p>
           </div>
           	 <div class="form-group">
-          <label>MiddleName</label>
+          <label>Legal Middle Name</label>
           <input type="text" 
                  class="form-control"
                  placeholder="MiddleName"
@@ -63,7 +63,7 @@
           </div>
         
                 <div class="form-group">
-          <label class="red"><i class="fa fa-asterisk"></i> LastName</label>
+          <label class="red"><i class="fa fa-asterisk"></i>Legal Last Name</label>
           <input type="text" 
                  class="form-control"
                  placeholder="LastName"
@@ -78,7 +78,6 @@
               <p ng-message="required"></p>
                <p ng-message="maxlength">Your field is too long</p>
           </div>
-          <span ng-show="myForm.$valid">Hello</span>
         
         <div class="form-group">
         <label class="red"><i class="fa fa-asterisk"></i>Gender</label>    
@@ -96,7 +95,7 @@
           
         <div class="form-group" required>
         <label>Date of Birth</label>
-            <input class=" form-control" type="text" name="dob" placeholder="Date of Birth" ng-disabled="dem.done"datepicker-popup='dd-MMMM-yyyy' dateOptions='dateOptions' ng-model="dem.day" is-open="opened" close-text="Close" required>
+            <input class=" form-control" type="text" name="dob" placeholder="Date of Birth" ng-disabled="dem.done"datepicker-popup='{{format}}' dateOptions='dateOptions' ng-model="dem.day" is-open="opened" close-text="Close" required>
             </div>
           
            <div ng-messages="myForm.dob.$error" style="color:maroon" role="alert">
@@ -138,7 +137,7 @@
           <input type="text" 
                  class="form-control"
                  placeholder="500"
-                 ng-model="dem.stname"
+                 ng-model="dem.stnum"
                  name="stNumber"
                  ng-disabled="dem.done"
                  ng-maxlength="100">
@@ -148,7 +147,7 @@
           </div> 
           
                       <div class="form-group">
-                  <label>Street name</label>
+                  <label>Street Name</label>
           <input type="text" 
                  class="form-control"
                  placeholder=""
@@ -157,10 +156,32 @@
                  ng-disabled="dem.done"
                  ng-maxlength="100">
         </div>
+          
               <div ng-messages="myForm.StreetName.$error" style="color:maroon" role="alert">
         <p ng-message="maxlength">Your field is too long</p>          
           </div> 
-            
+          
+                     <div class="form-group">
+          <label>Street Type</label>
+        <select class="form-control" ng-disabled="dem.done" ng-model="dem.StreetType" name="sT"><option ng-repeat="st in sts track by $index" value="{{st}}">{{st}}</option>
+            </select>
+        </div>
+          
+          <div class="form-group">
+          <label>Street Direction</label>
+          <select class="form-control" ng-disabled="dem.done" required ng-model="dem.streetDirection">
+            <option value="East">East</option>
+            <option value="North">North</option>
+            <option value="NorthEast">NorthEast</option>
+             <option value="NorthWest">NorthWest</option>
+            <option value="South">South</option>
+             <option value="SouthEast">SouthEast</option>
+            <option value="SouthWest">SouthWest</option>
+            <option value="West">West</option>
+            </select>
+        </div>  
+          
+          
         <div class="form-group">
           <label>PO Box</label>
           <input type="text" 
@@ -204,7 +225,7 @@
           </div> 
           
                   <div class="form-group">
-                  <label class="red">Rural route</label>
+                  <label>Rural Route</label>
           <input type="text" 
                  class="form-control"
                  placeholder="First"
@@ -229,12 +250,12 @@
           </div> 
           
                   <div class="form-group">
-          <label>Province</label>
+          <label>Province/Territory</label>
     <select class="form-control" ng-disabled="dem.done" name="province" ng-model="dem.prov"required>
             <option value="Ontario">Ontario</option>
             <option value="British Columbia">British Columbia</option>
             <option value="Other">Other</option>
-            <option value="Female">Undefined</option>
+            <option value="Undefined">Undefined</option>
             </select>
         </div>
 
@@ -259,6 +280,13 @@
           </div>  
 <!--          <span class="red error"  ng-show="myForm.postalCode.$error.pattern"><em>Incorrect format</em></span>-->
                    
+          
+          <div class="form-group">
+              <label class="red"><i class="fa fa-asterisk"></i>Country</label>
+              <input type="text" class="form-control" ng-model="dem.country" name="Country" ng-disabled="dem.done" required>
+          </div>
+          
+          
         <div class="form-group">
                   <label class="red"><i class="fa fa-asterisk"></i>Submitter First Name</label>
           <input type="text" 
@@ -404,11 +432,11 @@
     </accordion-group>
           
  <accordion-group heading="Immunization(s)">
-     <button class="btn btn-default form-control" ng-click="open()" ng-disabled="imm.done">Report Vaccination(s)</button>
+     <!--<button class="btn btn-default form-control" ng-click="open()" ng-disabled="imm.done">Report Vaccination(s)</button>-->
      <!--Accordion body-->
      <br>
      <br>
-     
+    
          <div class="container-fluid">
 	<div class="vaccList client">
 		<div id="tableDiv" class="section group">
@@ -445,10 +473,11 @@
 				</thead>
 				<tbody >
 					<tr  ng-repeat="record in records track by $index">
-					<td><input type="text" class="form-control" datepicker-popup='dd-MMMM-yyyy' dateOptions='dateOptions' ng-model="date" is-open="opened" close-text="Close" /></td>
-					<td><input type="text" class="form-control"/></td>
+					<td><input type="text" class="form-control" datepicker-popup='{{format}}' dateOptions='dateOptions' ng-model="hist[$index].date" is-open="opened" close-text="Close" /></td>
+					<td><input class="form-control" ng-model="historical[$index].agent"  ng-blur="checkdis(record.id)"
+                  typeahead="agent for agent in agents | filter:$viewValue|limitTo:8"></td>
 					<td   class="td1" ng-repeat= "dis in diseases[$index].entry">
-					<input type="checkbox" class=" input-group-lg form-control" ng-model="dis.checked">
+					<input type="checkbox" class=" input-group-lg form-control" ng-model="dis.checked" ng-click="checkvac(record.id)">
 					
 				
 					</td>
@@ -468,7 +497,8 @@
 	</div>
 </div>
 <!--		<svg  ng-If="record.diseaseCol[dis] == 'y'" width="15" height="15"><circle r="4" stroke="black" stroke-width="2" transform="translate(10, 10)" fill="black"</circle></svg>-->
- <pre>{{ diseases| json }}</pre>
+
+ <pre>{{records| json }}</pre>
 <button class="btn btn-primary" ng-click="add()">Vaccine Entry</button>
 <button class="btn btn-primary" ng-click="add()">Add Entry</button>
      
@@ -489,8 +519,8 @@
 
 </table>
 <br>
-     <button ng-if="info.show" class="btn btn-primary pull-right" ng-click="mupdate()" ng-disabled="imm.done">Done</button>
-     <button ng-if="info.show" class="btn btn-primary pull-left" ng-click="medit()" ng-disabled="!imm.done">Edit</button>
+     <button class="btn btn-primary pull-right" ng-click="mupdate()" ng-disabled="imm.done">Done</button>
+     <button class="btn btn-primary pull-left" ng-click="medit()" ng-disabled="!imm.done">Edit</button>
     </accordion-group>
         <!-- CSV, send to server -->
     <accordion-group heading="Verify and Submit">
@@ -543,7 +573,7 @@
     <div class = "col-xs-6">
      <div class="form-group">
         <label class="red"> <i class="fa fa-asterisk"></i> Date<br>Administered</label>
-              <input type="text" class="form-control" datepicker-popup='dd-MMMM-yyyy' dateOptions='dateOptions' ng-model="info.day" is-open="opened" close-text="Close" />
+              <input type="text" class="form-control" datepicker-popup='{{format}}' dateOptions='dateOptions' ng-model="info.day" is-open="opened" close-text="Close" />
                   
     </div>
             </div>
