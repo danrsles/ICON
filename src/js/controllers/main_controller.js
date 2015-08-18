@@ -42,10 +42,22 @@ console.log(cities);
 return cities;
 });
 };
- 
+ $scope.getSchool = function (val){
+var url=  '//cityservice.mybluemix.net/schools/canada/ontario/'+val   
+return $http.get(url).then(function(response){
+    var schools=[];
+console.log(response);    
+angular.forEach(response.data,function(item)
+                {
+schools.push(item)
+});   
+console.log(schools);    
+return schools;
+});
+};
                
 $scope.sts=["Abbey","Acres","Alley","Allée","Autoroute","Avenue","Avenue","Bay","Beach","Bend","Boulevard","Boulevard","By-pass","Byway","Campus","Cape","Carrefour","Carré","Centre","Centre","Cercle","Chase","Chemin","Circle","Circuit","Close","Common","Concession","Corners","Cour","Cours","Court","Cove","Crescent","Croissant","Crossing","Cul-de-sac","Côte","Dale","Dell","Diversion","Downs","Drive","Driveway","End","Esplanade","Estates","Expressway","Extension","Farm","Field","Forest","Freeway","Front","Gardens","Gate","Glade","Glen","Green","Grounds","Grove","Harbour","Heath","Heights","Highlands","Highway","Hill","Hollow","Impasse","Inlet","Island","Key","Knoll","Landing","Lane","Limits","Line","Link","Lookout","Loop","Mall","Manor","Maze","Meadow","Mews","Montée","Moor","Mount","Mountain","Orchard","Parade","Parc","Park","Parkway","Passage","Path","Pathway","Pines","Place","Place","Plateau","Plaza","Point","Pointe","Port","Private","Promenade","Quai","Quay","Ramp","Rang","Range","Ridge","Rise","Road","Rond-point","Route","Row","Rue","Ruelle","Run","Sentier","Sideroad","Square","Street","Subdivision","Terrace","Terrasse","Thicket","Towers","Townline","Trail","Turnabout","Vale","Via","View","Village","Villas","Vista","Voie","Walk","Way","Wharf","Wood","Wynd","Échangeur","Île"];
-$scope.dem={done:false, pass:false, health:'', fname:'',mname:'',lname:'',gender:'',day:'',addressType:'',unumber:'',stnum:'',streetName:'',city:'',streetType:'',streetDirection:'',poBox:'',prov:'',country:'Canada',poCode:'',SubmitterFN:'',SubmitterLN:'',sr:'',SubmitterPhoneNumber:'',SubmitterPhoneNumbeType:'',sEA:'',STN:'',RPO:'',Ruralroute:''};   
+$scope.dem={done:false, pass:false, health:'', fname:'',mname:'',lname:'',gender:'',day:'',addressType:'',unumber:'',stnum:'',streetName:'',city:'',streetType:'',streetDirection:'',poBox:'',prov:'',country:'Canada',poCode:'',SubmitterFN:'',SubmitterLN:'',sr:'',SubmitterPhoneNumber:'',SubmitterPhoneNumbeType:'',sEA:'',STN:'',RPO:'',Ruralroute:'',school:''};   
 
     $scope.self= function (){
 if($scope.dem.sr=='Self')
@@ -341,7 +353,7 @@ $scope.info ={imm: '',provider: '',lotNumber: '',day:'',month:0,year:0};
     
     $scope.pload= function(){        
 $scope.payload=[{"data":"ICON","infoSrce":"email report",
-"patient":{"hcn":$scope.dem.health,"fName":$scope.dem.fname,"mName":$scope.dem.mname,"lName":$scope.dem.lname,"email":$scope.dem.sEA,"phoneNumberType":$scope.dem.SubmitterPhoneNumberType, "phone":$scope.dem.SubmitterPhoneNumber, "phoneNumberType2":$scope.dem.SubmitterPhoneNumberType2, "phone2":$scope.dem.SubmitterPhoneNumber2,"gender":$scope.dem.gender,"dob":$scope.dem.day,"uNo":$scope.dem.unumber,"sNo":$scope.dem.stnumber,"addressType":$scope.dem.addressType,"Street Number":$scope.dem.stnum,"streetName":$scope.streetName,"streetType":$scope.dem.streetType,"streetDirection":$scope.dem.streetDirection,"sName":$scope.dem.stname,"city":$scope.dem.city,"pCode":$scope.dem.poCode,"STN":$scope.dem.STN,"RPO":$scope.dem.RPO,"RuralRoute":$scope.dem.Ruralroute,"Province":$scope.dem.prov,"Country":$scope.dem.country,
+"patient":{"hcn":$scope.dem.health,"fName":$scope.dem.fname,"mName":$scope.dem.mname,"lName":$scope.dem.lname,"email":$scope.dem.sEA,"phoneNumberType":$scope.dem.SubmitterPhoneNumberType, "phone":$scope.dem.SubmitterPhoneNumber, "phoneNumberType2":$scope.dem.SubmitterPhoneNumberType2, "phone2":$scope.dem.SubmitterPhoneNumber2,"gender":$scope.dem.gender,"dob":$scope.dem.day,"uNo":$scope.dem.unumber,"sNo":$scope.dem.stnumber,"addressType":$scope.dem.addressType,"Street Number":$scope.dem.stnum,"streetName":$scope.streetName,"streetType":$scope.dem.streetType,"streetDirection":$scope.dem.streetDirection,"sName":$scope.dem.stname,"city":$scope.dem.city,"pCode":$scope.dem.poCode,"STN":$scope.dem.STN,"RPO":$scope.dem.RPO,"RuralRoute":$scope.dem.Ruralroute,"Province":$scope.dem.prov,"Country":$scope.dem.country, "School/DayCare": $scope.dem.school,
 "relation":{"relationship":$scope.dem.sr,"fName":$scope.dem.SubmitterFN,"lName":$scope.dem.SubmitterLN}},
 "immunization":[{"date":"","agent":"","snowmed":"","site":"","location":"","disease":""}],"recaptcha":document.getElementById("g-recaptcha-response").value
 }];

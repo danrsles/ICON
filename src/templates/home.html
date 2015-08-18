@@ -410,10 +410,13 @@
                       
         <div class="form-group">
           <label>School/ Day Care</label>
-          <input type="text" 
-                 class="form-control"
+          <input class="form-control"
+                 ng-model="dem.school"
+                 name="School"
                  placeholder="St.Ignatious of Loyola"
+                 typeahead="school for school in getSchool($viewValue)"
                  ng-disabled="dem.done">
+    
         </div>
         
         <!--
