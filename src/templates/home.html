@@ -16,8 +16,9 @@
         <p>All Fields marked with an asterisk are required </p>
         <br>
  
-                  <accordion close-others="false">
-      <accordion-group heading="Person Demographics">
+                  <accordion close-others="false" >
+      <accordion-group  is-open="status.open">
+          <accordion-heading>Person Demographics<href class="pull-right" ng-click="edit()" ng-disabled="!dem.done">Edit</href></accordion-heading>
     <div class="form-group">
            <label>Health Card Number</label>
           <input type="text" 
@@ -169,7 +170,7 @@
           
           <div class="form-group">
           <label>Street Direction</label>
-          <select class="form-control" ng-disabled="dem.done" required ng-model="dem.streetDirection">
+          <select class="form-control" ng-disabled="dem.done" ng-model="dem.streetDirection">
             <option value="East">East</option>
             <option value="North">North</option>
             <option value="NorthEast">NorthEast</option>
@@ -250,7 +251,7 @@
           </div> 
           
                   <div class="form-group">
-          <label>Province/Territory</label>
+                      <label class="red"><i class="fa fa-asterisk"></i>Province/Territory</label>
     <select class="form-control" ng-disabled="dem.done" name="province" ng-model="dem.prov"required>
             <option value="Ontario">Ontario</option>
             <option value="British Columbia">British Columbia</option>
@@ -285,7 +286,29 @@
               <label class="red"><i class="fa fa-asterisk"></i>Country</label>
               <input type="text" class="form-control" ng-model="dem.country" name="Country" ng-disabled="dem.done" required>
           </div>
+
+                  <div class="form-group">
+        <label class="red"><i class="fa fa-asterisk"></i>Submitter Relationship</label>    
+        <select class="form-control" ng-disabled="dem.done" required name="subRelationship" ng-model="dem.sr" ng-change="self()">
+            <option value="Parent">Parent</option>
+            <option value="Grandparent">Grandparent</option>
+            <option value="Legal Guardian">Legal Guardian</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Doctor">Doctor</option>
+            <option value="Self">Self</option>
+            <option value="Other">Other</option>
+            </select>
+        </div>
+          <div>
+              <p ng-if="dem.sr =='Other'"> Please describe your relationship with the person you are submitting for:</p>
+              <textarea ng-if="dem.sr =='Other'"class="form-control" rows="3" required  ng-maxlength="100"></textarea>
+          </div>
           
+          
+               <div ng-messages="myForm.subRelationship.$error" style="color:maroon" role="alert">
+        <p ng-message="required"></p>
+        <p ng-message="maxlength">Your field is too long</p>          
+          </div>
           
         <div class="form-group">
                   <label class="red"><i class="fa fa-asterisk"></i>Submitter First Name</label>
@@ -319,28 +342,7 @@
         <p ng-message="maxlength">Your field is too long</p>          
           </div> 
           
-        <div class="form-group">
-        <label class="red"><i class="fa fa-asterisk"></i>Submitter Relationship</label>    
-        <select class="form-control" ng-disabled="dem.done" required name="subRelationship" ng-model="dem.sr">
-            <option value="Parent">Parent</option>
-            <option value="Grandparent">Grandparent</option>
-            <option value="Legal Guardian">Legal Guardian</option>
-            <option value="Nurse">Nurse</option>
-            <option value="Doctor">Doctor</option>
-            <option value="Self">Self</option>
-            <option value="Other">Other</option>
-            </select>
-        </div>
-          <div>
-              <p ng-if="sr =='Other'"> Please describe your relationship with the person you are submitting for:</p>
-              <textarea ng-if="sr =='Other'"class="form-control" rows="3" required  ng-maxlength="100"></textarea>
-          </div>
-          {{sr}}
-          
-               <div ng-messages="myForm.subRelationship.$error" style="color:maroon" role="alert">
-        <p ng-message="required"></p>
-        <p ng-message="maxlength">Your field is too long</p>          
-          </div>
+
           
         <div class="form-group">
         <label class="red"><i class="fa fa-asterisk"></i>Submitter Phone Number Type</label>    
@@ -414,30 +416,23 @@
                  ng-disabled="dem.done">
         </div>
         
-        <div class="form-group">
-          <label>School/Day Care City</label>
-          <input type="text" 
-                 class="form-control"
-                 placeholder="Toronto"
-                 ng-disabled="dem.done">
-        </div>
-        
         <!--
         <input class="form-control" type="text" id="defaultReal" name="defaultReal"></p>
       <button class="btn btn-primary" id="attempt" onclick="check()">Attempt</button>
       <em> <p id="help"></p></em>-->
-                      <button class="btn btn-primary pull-left" ng-click="edit()" ng-disabled="!dem.done">Edit</button>
+                      
                       <button class="btn btn-primary pull-right" ng-click="update()" ng-disabled="dem.done">Done</button>                      
                       
     </accordion-group>
           
- <accordion-group heading="Immunization(s)">
+ <accordion-group is-open="status.opentwo">
+     <accordion-heading>Immunization(s)<href class="pull-right" ng-click="medit()" ng-disabled="!imm.done">Edit</href></accordion-heading>
      <!--<button class="btn btn-default form-control" ng-click="open()" ng-disabled="imm.done">Report Vaccination(s)</button>-->
      <!--Accordion body-->
      <br>
      <br>
-    
-         <div class="container-fluid">
+     <div class="alert alert-info" role="alert" ><h4>The immunization reporting model, imitates the layout of the Ontario yellow card. To report a vaccine,either check off the diseases as shown on your yellow card, or fill out vaccine brand name</h4></div>
+         <div class="container-fluid" ng-disabled="imm.done">
 	<div class="vaccList client">
 		<div id="tableDiv" class="section group">
 			<table width="1112px" class="table1"><!-- table-striped">-->
@@ -496,11 +491,14 @@
 		</div>
 	</div>
 </div>
+<br>
+<h4>Comments</h4>
+ <textarea ng-disabled="imm.done"class="form-control" rows="4" required  ng-maxlength="3000"></textarea>
+<br>
 <!--		<svg  ng-If="record.diseaseCol[dis] == 'y'" width="15" height="15"><circle r="4" stroke="black" stroke-width="2" transform="translate(10, 10)" fill="black"</circle></svg>-->
 
  <!--<pre>{{records| json }}</pre>-->
-<button class="btn btn-primary" ng-click="add()">Vaccine Entry</button>
-<button class="btn btn-primary" ng-click="add()">Add Entry</button>
+
      
                    <label ng-if="info.show">Summary</label>
 <table id="sumTable" class="table table-striped" ng-if="info.show">
@@ -518,18 +516,21 @@
     </tr>
 
 </table>
-<br>
-     <button class="btn btn-primary pull-right" ng-click="mupdate()" ng-disabled="imm.done">Done</button>
-     <button class="btn btn-primary pull-left" ng-click="medit()" ng-disabled="!imm.done">Edit</button>
+
+<button class="btn btn-primary pull-left" ng-click="add()"ng-disabled="imm.done">Add Entry</button>
+<button class="btn btn-primary pull-right" ng-click="mupdate()" ng-disabled="imm.done">Done</button>
     </accordion-group>
         <!-- CSV, send to server -->
     <accordion-group heading="Verify and Submit">
         <!--<button class="btn btn-default form-control" ng-csv="getArray" csv-header="['Name', 'Health Card Number']" filename="test.csv">Export to CSV</button>-->
-        <h4>CAPTCHA</h4>
-        <br>
+        
+        <div class="alert alert-info"><h4>CAPTCHA</h4></div>
+        <div class="align-center">
         <div class="g-recaptcha" data-sitekey="6Lc7gAoTAAAAAGFDINzUDv5G40oe8DyzTGHJA_pv"></div>
+        </div>
+        <br>
         <button class="btn btn-default form-control" ng-click="pload()">LOAD JSON</button>
-        <p id="json"></p>
+        <em><p id="json"></p></em>
   </accordion> 
     <div>
     <script type="text/ng-template" id="myModalContent.html">
@@ -612,19 +613,6 @@
     <div ui-content-for="navbarAction">
       <a class='btn' ng-click='submit()'>Verify and Submit</a>
     </div>
-
-<script>
-    $(document).ready(function(){
-//$(".combobox").combobox();
-        $("input").click(function(){
-        $(".datepicker").pickadate({
-         selectYears: 100,
-  selectMonths: true
-            });  
-
-        });
-    }); //this was missing
-</script>
     </fieldset>
 
     <div ui-content-for="navbarAction">

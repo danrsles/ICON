@@ -30,7 +30,21 @@ $scope.bar.value=v;
 app.controller('homeController', function ($scope, $modal,$http, $log,connect) {
 $scope.cities= ['Toronto']
 $scope.sts=["Abbey","Acres","Alley","Allée","Autoroute","Avenue","Avenue","Bay","Beach","Bend","Boulevard","Boulevard","By-pass","Byway","Campus","Cape","Carrefour","Carré","Centre","Centre","Cercle","Chase","Chemin","Circle","Circuit","Close","Common","Concession","Corners","Cour","Cours","Court","Cove","Crescent","Croissant","Crossing","Cul-de-sac","Côte","Dale","Dell","Diversion","Downs","Drive","Driveway","End","Esplanade","Estates","Expressway","Extension","Farm","Field","Forest","Freeway","Front","Gardens","Gate","Glade","Glen","Green","Grounds","Grove","Harbour","Heath","Heights","Highlands","Highway","Hill","Hollow","Impasse","Inlet","Island","Key","Knoll","Landing","Lane","Limits","Line","Link","Lookout","Loop","Mall","Manor","Maze","Meadow","Mews","Montée","Moor","Mount","Mountain","Orchard","Parade","Parc","Park","Parkway","Passage","Path","Pathway","Pines","Place","Place","Plateau","Plaza","Point","Pointe","Port","Private","Promenade","Quai","Quay","Ramp","Rang","Range","Ridge","Rise","Road","Rond-point","Route","Row","Rue","Ruelle","Run","Sentier","Sideroad","Square","Street","Subdivision","Terrace","Terrasse","Thicket","Towers","Townline","Trail","Turnabout","Vale","Via","View","Village","Villas","Vista","Voie","Walk","Way","Wharf","Wood","Wynd","Échangeur","Île"];
-$scope.dem={done:false, pass:false, health:'', fname:'',mname:'',lname:'',gender:'',day:'',addressType:'',unumber:'',stnum:'',streetName:'',city:'',streetType:'',streetDirection:'',poBox:'',prov:'',country:'Canada',poCode:'',SubmitterFN:'',SubmitterLN:'',sr:'',SubmitterPhoneNumber:'',SubmitterPhoneNumbeType:'',sEA:'',STN:'',RPO:'',Ruralroute:''};    
+$scope.dem={done:false, pass:false, health:'', fname:'',mname:'',lname:'',gender:'',day:'',addressType:'',unumber:'',stnum:'',streetName:'',city:'',streetType:'',streetDirection:'',poBox:'',prov:'',country:'Canada',poCode:'',SubmitterFN:'',SubmitterLN:'',sr:'',SubmitterPhoneNumber:'',SubmitterPhoneNumbeType:'',sEA:'',STN:'',RPO:'',Ruralroute:''};   
+
+    $scope.self= function (){
+if($scope.dem.sr=='Self')
+{
+$scope.dem.SubmitterFN = $scope.dem.fname;
+$scope.dem.SubmitterLN = $scope.dem.lname;    
+}    
+else
+{
+$scope.dem.SubmitterFN ="";
+$scope.dem.SubmitterLN ="";    
+}    
+    };
+$scope.status = {open:true,opentwo:false};   
 $scope.imm={done:false};
 $scope.poCode=""; 
 $scope.$watchCollection("[dem.health,dem.fname]", function(newValue, oldValue) {
@@ -44,7 +58,8 @@ $scope.check= function(){
 $scope.update= function(){    
 if($scope.myForm.$valid){
 connect.give(25);
-$scope.dem.done="true";    
+$scope.dem.done="true"; 
+$scope.status.open = false;    
 }
 else
 {
@@ -53,13 +68,18 @@ else
 };
     
 $scope.edit=function(){
+    if($scope.myForm.$valid){
 connect.give(0);
-$scope.dem.done= !$scope.dem.done;    
+$scope.dem.done= false; 
+$scope.status.open =!$scope.status.open ; }   
+else{//Do nothing
+}
 };
 
 $scope.mupdate=function(){
 connect.give(50);
-$scope.imm.done="true";    
+$scope.imm.done="true";
+$scope.status.opentwo=false;    
 }
 
 $scope.medit=function(){
