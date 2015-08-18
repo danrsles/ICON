@@ -303,7 +303,7 @@ All fields contain an ng-model directive which is what binds the field input to 
         </div>
           <div>
               <p ng-if="dem.sr =='Other'"> Please describe your relationship with the person you are submitting for:</p>
-              <textarea ng-if="dem.sr =='Other'"class="form-control" rows="3" required  ng-maxlength="100"></textarea>
+              <textarea ng-model="dem.srOther" ng-if="dem.sr =='Other'"class="form-control" rows="3" required  ng-maxlength="100"></textarea>
           </div>
           
           
