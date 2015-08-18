@@ -138,7 +138,7 @@
           <input type="text" 
                  class="form-control"
                  placeholder="500"
-                 ng-model="dem.stnum"
+                 ng-model="dem.stnumber"
                  name="stNumber"
                  ng-disabled="dem.done"
                  ng-maxlength="100">
@@ -376,7 +376,7 @@
         
                 <div class="form-group">
         <label>Submitter Phone Number Type</label>    
-        <select class="form-control" ng-disabled="dem.done" name="Spnt2" ng-model="SubmitterPhoneNumberType2">
+        <select class="form-control" ng-disabled="dem.done" name="Spnt2" ng-model="dem.S2">
             <option value="Home">Home</option>
             <option value="Work">Work</option>
             <option value="Mobile">Mobile</option>
@@ -391,6 +391,7 @@
                  class="form-control"
                  placeholder="xxx-xxx-xxxx"
                  ng-disabled="dem.done"
+                 ng-model="dem.SubmitterPhoneNumber2"
                  name="">
         </div>
         
