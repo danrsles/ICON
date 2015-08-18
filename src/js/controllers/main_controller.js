@@ -57,7 +57,7 @@ return schools;
 };
                
 $scope.sts=["Abbey","Acres","Alley","Allée","Autoroute","Avenue","Avenue","Bay","Beach","Bend","Boulevard","Boulevard","By-pass","Byway","Campus","Cape","Carrefour","Carré","Centre","Centre","Cercle","Chase","Chemin","Circle","Circuit","Close","Common","Concession","Corners","Cour","Cours","Court","Cove","Crescent","Croissant","Crossing","Cul-de-sac","Côte","Dale","Dell","Diversion","Downs","Drive","Driveway","End","Esplanade","Estates","Expressway","Extension","Farm","Field","Forest","Freeway","Front","Gardens","Gate","Glade","Glen","Green","Grounds","Grove","Harbour","Heath","Heights","Highlands","Highway","Hill","Hollow","Impasse","Inlet","Island","Key","Knoll","Landing","Lane","Limits","Line","Link","Lookout","Loop","Mall","Manor","Maze","Meadow","Mews","Montée","Moor","Mount","Mountain","Orchard","Parade","Parc","Park","Parkway","Passage","Path","Pathway","Pines","Place","Place","Plateau","Plaza","Point","Pointe","Port","Private","Promenade","Quai","Quay","Ramp","Rang","Range","Ridge","Rise","Road","Rond-point","Route","Row","Rue","Ruelle","Run","Sentier","Sideroad","Square","Street","Subdivision","Terrace","Terrasse","Thicket","Towers","Townline","Trail","Turnabout","Vale","Via","View","Village","Villas","Vista","Voie","Walk","Way","Wharf","Wood","Wynd","Échangeur","Île"];
-$scope.dem={done:false, pass:false, health:'', fname:'',mname:'',lname:'',gender:'',day:'',addressType:'',unumber:'',stnumber:'',streetName:'',city:'',streetType:'',streetDirection:'',poBox:'',prov:'',country:'Canada',poCode:'',SubmitterFN:'',SubmitterLN:'',sr:'',SubmitterPhoneNumber:'',SubmitterPhoneNumber2:'',SubmitterPhoneNumberType:'',S2:'',sEA:'',STN:'',RPO:'',Ruralroute:'',school:''};   
+$scope.dem={done:false, pass:false, health:'', fname:'',mname:'',lname:'',gender:'',day:'',addressType:'',unumber:'',stnumber:'',streetName:'',city:'',streetType:'',streetDirection:'',poBox:'',prov:'',country:'Canada',poCode:'',SubmitterFN:'',SubmitterLN:'',sr:'',SubmitterPhoneNumber:'',SubmitterPhoneNumber2:'',SubmitterPhoneNumberType:'',S2:'',sEA:'',STN:'',RPO:'',Ruralroute:'',school:'',comment:''};   
 
     $scope.self= function (){
 if($scope.dem.sr=='Self')
@@ -126,6 +126,7 @@ $scope.format='yyyy-MMMM-dd';
    var i= 0;
                 $scope.vaccList = vaccineNames;
                 $scope.diseaseCol = diseaseCol;
+    $scope.h=[{Other:''}];
     $scope.hist=[{date:''}];
     $scope.historical = [{agent:''}];
  $scope.agents=['MMR']
@@ -178,7 +179,7 @@ $scope.format='yyyy-MMMM-dd';
                
  
  
-                $scope.records=[{'Date':$scope.hist[0],'Vaccine':$scope.historical[0],'diseaseCol':$scope.diseases[0],'OtherDetails':''}];
+                $scope.records=[{'Date':$scope.hist[0],'Vaccine':$scope.historical[0],'diseaseCol':$scope.diseases[0],'OtherDetails':$scope.h[0]}];
                 $scope.add= function(){
                
                 var n= 'next'+i;
@@ -231,9 +232,10 @@ $scope.format='yyyy-MMMM-dd';
                 
                 
                 $scope.historical.push({'agent':''});
-                    $scope.hist.push({'date':''})
+                    $scope.hist.push({'date':''});
+                    $scope.h.push({'Other':''});
                                 $scope.diseases.push(p);
-   var length = $scope.diseases.length - 1;             $scope.records.push({'Date':$scope.hist[length],'Vaccine':$scope.historical[length],'diseaseCol':$scope.diseases[length],'OtherDetails':'','id':''+i});
+   var length = $scope.diseases.length - 1;             $scope.records.push({'Date':$scope.hist[length],'Vaccine':$scope.historical[length],'diseaseCol':$scope.diseases[length],'OtherDetails':$scope.h[length],'id':''+i});
 i=i+1;
  console.log(length);
                 }
@@ -252,6 +254,7 @@ $scope.delete=function(id){
                                 $scope.records.splice( index, 1 );
         $scope.diseases.splice( index, 1);
     $scope.hist.splice(index,1);
+     $scope.h.splice(index,1);
     $scope.historical.splice(index,1);
                 };
 $scope.checkdis=function(id)
@@ -353,21 +356,22 @@ $scope.info ={imm: '',provider: '',lotNumber: '',day:'',month:0,year:0};
     
     $scope.pload= function(){        
 $scope.payload=[{"data":"ICON","infoSrce":"email report",
-"patient":{"hcn":$scope.dem.health,"fName":$scope.dem.fname,"mName":$scope.dem.mname,"lName":$scope.dem.lname,"email":$scope.dem.sEA,"phoneNumberType":$scope.dem.SubmitterPhoneNumberType, "phone":$scope.dem.SubmitterPhoneNumber, "phoneNumberType2":$scope.dem.S2, "phone2":$scope.dem.SubmitterPhoneNumber2,"gender":$scope.dem.gender,"dob":$scope.dem.day,"uNo":$scope.dem.unumber,"Street Number":$scope.dem.stnumber,"addressType":$scope.dem.addressType,"streetName":$scope.dem.streetName,"streetType":$scope.dem.StreetType,"streetDirection":$scope.dem.streetDirection,"city":$scope.dem.city,"pCode":$scope.dem.poCode,"STN":$scope.dem.STN,"RPO":$scope.dem.RPO,"RuralRoute":$scope.dem.Ruralroute,"Province":$scope.dem.prov,"Country":$scope.dem.country, "School/DayCare": $scope.dem.school,
+"patient":{"hcn":$scope.dem.health,"fName":$scope.dem.fname,"mName":$scope.dem.mname,"lName":$scope.dem.lname,"email":$scope.dem.sEA,"phoneNumberType":$scope.dem.SubmitterPhoneNumberType, "phone":$scope.dem.SubmitterPhoneNumber, "phoneNumberType2":$scope.dem.S2, "phone2":$scope.dem.SubmitterPhoneNumber2,"gender":$scope.dem.gender,"dob":$scope.dem.day,"uNo":$scope.dem.unumber,"Street Number":$scope.dem.stnumber,"addressType":$scope.dem.addressType,"streetName":$scope.dem.streetName,"streetType":$scope.dem.StreetType,"streetDirection":$scope.dem.streetDirection,"city":$scope.dem.city,"pCode":$scope.dem.poCode,"STN":$scope.dem.STN,"RPO":$scope.dem.RPO,"RuralRoute":$scope.dem.Ruralroute,"Province":$scope.dem.prov,"Country":$scope.dem.country, "School/DayCare": $scope.dem.school,"comments":$scope.dem.comment,
 "relation":{"relationship":$scope.dem.sr,"fName":$scope.dem.SubmitterFN,"lName":$scope.dem.SubmitterLN}},
-"immunization":[{"date":"","agent":"","snowmed":"","site":"","location":"","disease":""}],"recaptcha":document.getElementById("g-recaptcha-response").value
+"immunization":[{"date":"","agent":"","snowmed":"",OtherDetails:"","site":"","location":"","disease":""}],"recaptcha":document.getElementById("g-recaptcha-response").value
 }];
   for(var h = 0; h <$scope.records.length; h++)
   { var a=$scope.records[h].Vaccine.agent;
     var b=$scope.records[h].Date.date;
    b=b.toISOString().substring(0,10);
     var c=$scope.records[h].diseaseCol.entry;
+   var t =$scope.records[h].OtherDetails.Other;
    var z;
     if(a =='MMR')
     {
     z=61153008
     }
-    $scope.payload[0].immunization[h]={"date":b,"agent":a, "disease":c,"snowmed":z};
+    $scope.payload[0].immunization[h]={"date":b,"agent":a,"OtherDetails":t, "disease":c,"snowmed":z};
   }
   console.log($scope.payload);
   document.getElementById("json").innerHTML = "Successfully loaded!"
