@@ -28,7 +28,22 @@ $scope.bar.value=v;
 });
 
 app.controller('homeController', function ($scope, $modal,$http, $log,connect) {
-$scope.cities= ['Toronto']
+$scope.cities= 
+$scope.getLocation = function (val){
+var url=  '//cityservice.mybluemix.net/cities/canada/ontario/'+val   
+return $http.get(url).then(function(response){
+    var cities=[];
+console.log(response);    
+angular.forEach(response.data,function(item)
+                {
+cities.push(item)
+});   
+console.log(cities);    
+return cities;
+});
+};
+ 
+               
 $scope.sts=["Abbey","Acres","Alley","Allée","Autoroute","Avenue","Avenue","Bay","Beach","Bend","Boulevard","Boulevard","By-pass","Byway","Campus","Cape","Carrefour","Carré","Centre","Centre","Cercle","Chase","Chemin","Circle","Circuit","Close","Common","Concession","Corners","Cour","Cours","Court","Cove","Crescent","Croissant","Crossing","Cul-de-sac","Côte","Dale","Dell","Diversion","Downs","Drive","Driveway","End","Esplanade","Estates","Expressway","Extension","Farm","Field","Forest","Freeway","Front","Gardens","Gate","Glade","Glen","Green","Grounds","Grove","Harbour","Heath","Heights","Highlands","Highway","Hill","Hollow","Impasse","Inlet","Island","Key","Knoll","Landing","Lane","Limits","Line","Link","Lookout","Loop","Mall","Manor","Maze","Meadow","Mews","Montée","Moor","Mount","Mountain","Orchard","Parade","Parc","Park","Parkway","Passage","Path","Pathway","Pines","Place","Place","Plateau","Plaza","Point","Pointe","Port","Private","Promenade","Quai","Quay","Ramp","Rang","Range","Ridge","Rise","Road","Rond-point","Route","Row","Rue","Ruelle","Run","Sentier","Sideroad","Square","Street","Subdivision","Terrace","Terrasse","Thicket","Towers","Townline","Trail","Turnabout","Vale","Via","View","Village","Villas","Vista","Voie","Walk","Way","Wharf","Wood","Wynd","Échangeur","Île"];
 $scope.dem={done:false, pass:false, health:'', fname:'',mname:'',lname:'',gender:'',day:'',addressType:'',unumber:'',stnum:'',streetName:'',city:'',streetType:'',streetDirection:'',poBox:'',prov:'',country:'Canada',poCode:'',SubmitterFN:'',SubmitterLN:'',sr:'',SubmitterPhoneNumber:'',SubmitterPhoneNumbeType:'',sEA:'',STN:'',RPO:'',Ruralroute:''};   
 

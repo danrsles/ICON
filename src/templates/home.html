@@ -243,8 +243,8 @@
           <div class="form-group">
             <label class="red"><i class="fa fa-asterisk"></i>City</label>
           <input class="form-control" ng-model="dem.city" name="City"
-                 ng-disabled="dem.done"
-                 required typeahead="city for city in cities | filter:$viewValue|limitTo:8">
+                 ng-disabled="dem.done" typeahead-loading="loadingLocations"
+                 required typeahead="city for city in getLocation($viewValue)">
         </div>
                <div ng-messages="myForm.City.$error" style="color:maroon" role="alert">
         <p ng-message="required"></p>
